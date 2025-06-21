@@ -20,7 +20,7 @@ const io = socketIo(server, {
 });
 
 app.use(cors({
-  origin: ['*'],
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }))
