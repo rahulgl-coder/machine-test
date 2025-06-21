@@ -59,6 +59,9 @@ socket.on('new_notification', (data) => {
 - `POST /api/auth/signup` – Register user
 - `POST /api/auth/login` – Login user
 
+### POST
+- `POST/api/post/add`-Add Post
+
 ### Notifications
 - `POST /api/notifications` – Create a notification (`follow`, `like`, `comment`)
 - `GET /api/notifications?page=1&limit=10` – Get paginated notification feed

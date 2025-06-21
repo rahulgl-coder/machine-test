@@ -7,7 +7,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const notificationRoutes = require('./Routes/notificationRoutes');
 const authRoutes = require('./Routes/authRoutes');
-const postRoutes = require('./Routes/postRoutes')
+
 const { authenticateSocket } = require('./middleware/middleware');
 
 
@@ -21,7 +21,7 @@ const io = socketIo(server, {
 
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
   credentials: true
 }))
 
@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/notifications', notificationRoutes);
-app.use('/api',postRoutes)
+
 
 
 app.set('io', io);
