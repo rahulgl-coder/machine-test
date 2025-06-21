@@ -5,8 +5,9 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
-const notificationRoutes = require('./routes/notificationRoutes');
-const authRoutes = require('./routes/authRoutes');
+const notificationRoutes = require('./Routes/notificationRoutes');
+const authRoutes = require('./Routes/authRoutes');
+const postRoutes = require('./Routes/postRoutes')
 const { authenticateSocket } = require('./middleware/middleware');
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/post',postRoutes)
 
 // Attach io to app for global access
 app.set('io', io);

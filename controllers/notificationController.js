@@ -8,7 +8,7 @@ exports.createNotification = async (req, res) => {
     const recipient = await User.findById(recipientId);
     if (!recipient) return res.status(404).json({ error: 'Recipient not found' });
 
-    // Respect user notification preferences
+ 
     if (!recipient.notificationPreferences[type]) return res.status(200).json({ message: 'Preference disabled' });
 
     const notification = await Notification.create({

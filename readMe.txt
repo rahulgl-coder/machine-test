@@ -1,8 +1,8 @@
-# DevifyX - Notification Feed API
+ Notification Feed API
 
-A complete Node.js + Express + MongoDB backend API for handling user notification feeds for actions like **follow**, **like**, and **comment**. Includes real-time updates using Socket.IO.
 
-## ✅ Features
+
+##  Features
 - JWT Authentication
 - Follow, Like, Comment Notifications
 - Real-time Notifications (Socket.IO)
@@ -14,13 +14,13 @@ A complete Node.js + Express + MongoDB backend API for handling user notificatio
 
 ---
 
-## 🚀 Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone Repository
 ```bash
-git clone <your-repo-url>
-cd devifyx-notification-api
-```
+git clone https://github.com/rahulgl-coder/machine-test
+
+
 
 ### 2. Install Dependencies
 ```bash
@@ -37,7 +37,7 @@ JWT_SECRET=your_jwt_secret_key
 
 ### 4. Start Server
 ```bash
-npm run dev
+npm start
 ```
 
 ### 5. WebSocket Connection (Client Sample)
@@ -90,7 +90,7 @@ Authorization: Bearer <jwt_token>
 
 ---
 
-## ✅ Tech Stack
+##  Tech Stack
 - Node.js
 - Express
 - MongoDB + Mongoose
@@ -100,11 +100,3 @@ Authorization: Bearer <jwt_token>
 
 ---
 
-## 📮 Submission
-Submit your GitHub repo + live URL if hosted.
-
-Form: [Assignment Submission Form](https://forms.gle/LAvLWFmHRLXswwsx5)
-
----
-
-> © 2025 DevifyX – All rights reserved.
