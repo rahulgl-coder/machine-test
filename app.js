@@ -20,7 +20,7 @@ const io = socketIo(server, {
 });
 
 app.use(cors({
-  origin: ['https://notification-api-goo7.onrender.com', 'http://localhost:3000'],
+  origin: ['*'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }))
