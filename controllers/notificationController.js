@@ -1,24 +1,37 @@
-// controllers/notificationController.js
+
 const Notification = require('../Models/Notification');
 const User = require('../Models/User');
 
 exports.createNotification = async (req, res) => {
   try {
-    const { recipientId, type, postId } = req.body;
+    const { recipientId, type, postId} = req.body;
+  
+    
     const recipient = await User.findById(recipientId);
     if (!recipient) return res.status(404).json({ error: 'Recipient not found' });
+
+console.log(req.user._id);
+console.log(recipient.notificationPreferences);
+
 
  
     if (!recipient.notificationPreferences[type]) return res.status(200).json({ message: 'Preference disabled' });
 
-    const notification = await Notification.create({
-      recipient: recipientId,
-      sender: req.user._id,
-      type,
-      postId: postId || null
-    });
+  
+   const notification = await  Notification.create({
+  recipient: recipientId,
+  sender: req.user._id,
+  type,
+  postId: postId || null
+})
+.then(notification => {
+  console.log('Notification created:', notification);
+})
+.catch(err => {
+  console.error('Notification creation failed:', err);
+});
 
-    // Send real-time notification
+
     const io = req.app.get('io');
     io.to(recipientId).emit('new_notification', notification);
 
@@ -28,22 +41,34 @@ exports.createNotification = async (req, res) => {
   }
 };
 
+
+
 exports.getNotifications = async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
+
+    const total = await Notification.countDocuments({ recipient: req.user._id });
+
     const notifications = await Notification.find({ recipient: req.user._id })
       .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(parseInt(limit))
       .populate('sender', 'username');
 
-    res.status(200).json(notifications);
+    res.status(200).json({
+      currentPage: parseInt(page),
+      totalPages: Math.ceil(total / limit),
+      totalNotifications: total,
+      notifications
+    });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
 };
 
-exports.markAsRead = async (req, res) => {
+
+ exports.markAsRead = async (req, res) => {
   try {
     const updated = await Notification.findOneAndUpdate(
       { _id: req.params.id, recipient: req.user._id },
@@ -75,6 +100,7 @@ exports.markAllAsRead = async (req, res) => {
     res.status(200).json({ message: 'All notifications marked as read' });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
+
   }
 };
 

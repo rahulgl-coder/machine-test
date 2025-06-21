@@ -4,9 +4,10 @@ const Post = require('../Models/Post');
 const { authenticateUser } = require('../middleware/middleware');
 
 
-router.post('/add', authenticateUser, async (req, res) => {
+router.post('/add/:id', authenticateUser, async (req, res) => {
   try {
     const { content } = req.body;
+    const _id=req.params.id
 
     if (!content) {
       return res.status(400).json({ error: 'Content is required' });
@@ -14,7 +15,7 @@ router.post('/add', authenticateUser, async (req, res) => {
 
     const newPost = await Post.create({
       content,
-      author: req.user._id
+      author:_id
     });
 
     res.status(201).json(newPost);

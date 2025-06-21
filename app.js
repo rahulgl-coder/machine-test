@@ -1,4 +1,4 @@
-// server.js
+
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -36,12 +36,12 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/notifications', notificationRoutes);
-app.use('/api/post',postRoutes)
+app.use('/api',postRoutes)
 
-// Attach io to app for global access
+
 app.set('io', io);
 
-// Authenticate and handle socket connections
+
 io.use(authenticateSocket);
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.userId}`);

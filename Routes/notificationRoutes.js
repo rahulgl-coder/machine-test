@@ -1,4 +1,4 @@
-// routes/notificationRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const { 
@@ -13,8 +13,8 @@ const {
 
 const { authenticateUser } = require('../middleware/middleware');
 
-router.post('/', authenticateUser, createNotification); // like, follow, comment
-router.get('/', authenticateUser, getNotifications); // feed with pagination
+router.post('/', authenticateUser, createNotification);
+router.get('/', authenticateUser, getNotifications); 
 router.patch('/:id/read', authenticateUser, markAsRead);
 router.patch('/:id/unread', authenticateUser, markAsUnread);
 router.patch('/read/all', authenticateUser, markAllAsRead);
