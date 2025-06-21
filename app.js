@@ -10,12 +10,20 @@ const authRoutes = require('./Routes/authRoutes');
 const postRoutes = require('./Routes/postRoutes')
 const { authenticateSocket } = require('./middleware/middleware');
 
+
+
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: { origin: '*' }
 });
+
+app.use(cors({
+  origin: ['https://notification-api-goo7.onrender.com', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}))
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
